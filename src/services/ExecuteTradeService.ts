@@ -5,12 +5,22 @@ import { OrderInfo } from "../types/UniswapTypes";
 export class ExecuteTradeService {
   private trader: UniswapTraderClient;
 
-  constructor(rpcUrl: string, privateKey: string) {
+  constructor(
+    rpcUrl: string,
+    privateKey: string,
+    traderAddress: string,
+    orderManagerAddress: string
+  ) {
     if (!privateKey?.match(/^(0x)?[0-9a-fA-F]{64}$/)) {
-        throw new Error('Invalid private key format');
+      throw new Error('Invalid private key format');
     }
     const provider = new ethers.JsonRpcProvider(rpcUrl);
-    this.trader = new UniswapTraderClient(provider, privateKey);
+    this.trader = new UniswapTraderClient(
+      provider,
+      privateKey,
+      traderAddress,
+      orderManagerAddress
+    );
   }
 
   async executeBuyOrder(

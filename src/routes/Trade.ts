@@ -5,6 +5,8 @@ const router = Router();
 const tradeService = new ExecuteTradeService(
   process.env.RPC_URL as string,
   process.env.PRIVATE_KEY as string,
+  process.env.TRADER_CONTRACT_ADDRESS as string,
+  process.env.ORDER_MANAGER_ADDRESS as string
 );
 
 // Market Buy
